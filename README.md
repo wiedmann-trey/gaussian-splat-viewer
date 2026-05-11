@@ -9,8 +9,6 @@ WebGPU Gaussian splat renderer
 ```bash
 npm install
 npm run dev
-npm run build
-npm run deploy
 ```
 
 ## Implementation
