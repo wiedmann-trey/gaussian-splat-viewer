@@ -6,9 +6,9 @@ import {
   setupFileInput, setSceneName, setSceneCredit, updateStats,
 } from './ui'
 
-const DEFAULT_SCENE_URL    = 'https://huggingface.co/datasets/Giimann/my-gaussian-splats/resolve/main/house.splat'
-const DEFAULT_SCENE_NAME   = 'house.splat'
-const DEFAULT_SCENE_CREDIT = 'Giimann'
+const DEFAULT_SCENE_URL    = 'https://github.com/wiedmann-trey/gaussian-splat-viewer/releases/download/v1.0/clockstatue.splat'
+const DEFAULT_SCENE_NAME   = 'clockstatue.ply'
+const DEFAULT_SCENE_CREDIT = '@naturalai via superspl.at'
 
 const SORT_THRESHOLD = 0.9998
 
