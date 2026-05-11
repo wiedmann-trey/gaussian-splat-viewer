@@ -6,7 +6,7 @@ import {
   setupFileInput, setSceneName, setSceneCredit, updateStats,
 } from './ui'
 
-const DEFAULT_SCENE_URL    = 'https://github.com/wiedmann-trey/gaussian-splat-viewer/releases/download/v1.0/clockstatue.splat'
+const DEFAULT_SCENE_URL    = 'https://github.com/wiedmann-trey/gaussian-splat-viewer/releases/download/v1.0/clockstatue.ply'
 const DEFAULT_SCENE_NAME   = 'clockstatue.ply'
 const DEFAULT_SCENE_CREDIT = '@naturalai via superspl.at'
 
