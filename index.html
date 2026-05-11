@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splat Viewer</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --text:   #ccc;
+      --dim:    #555;
+      --border: #2a2a2a;
+      --bg-ui:  rgba(18,18,18,0.88);
+      --font:   system-ui, sans-serif;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #111;
+      overflow: hidden;
+      font-family: var(--font);
+      color: var(--text);
+    }
+
+    canvas { display: block; width: 100%; height: 100%; }
+
+    #ui { position: fixed; inset: 0; pointer-events: none; }
+
+    .panel {
+      position: absolute;
+      background: var(--bg-ui);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      pointer-events: all;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    #panel-brand { top: 16px; left: 16px; }
+    .brand     { font-size: 13px; font-weight: 600; color: var(--text); }
+    .brand-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
+
+    #panel-stats { bottom: 16px; left: 16px; }
+    .stat       { display: flex; justify-content: space-between; gap: 24px; font-size: 11px; line-height: 1.9; }
+    .stat-label { color: var(--dim); }
+    .stat-value { color: var(--text); }
+
+    #panel-controls { bottom: 16px; right: 16px; }
+    .hint   { font-size: 11px; color: var(--dim); line-height: 1.9; }
+    .hint b { color: var(--text); font-weight: 500; }
+
+    #panel-load { top: 16px; right: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    #load-btn {
+      font-family: var(--font);
+      font-size: 12px;
+      padding: 5px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--text);
+    }
+    #load-btn:hover { border-color: #444; background: rgba(255,255,255,0.04); }
+    #file-input  { display: none; }
+    #scene-label { font-size: 11px; color: var(--dim); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    #loading-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s;
+    }
+    #loading-overlay.visible { opacity: 1; pointer-events: all; }
+    .loading-label { font-size: 11px; color: var(--dim); }
+    .loading-track { width: 160px; height: 1px; background: var(--border); overflow: hidden; position: relative; }
+    .loading-fill  { position: absolute; inset: 0; background: #555; transform: translateX(-100%); animation: sweep 1s linear infinite; }
+    @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+    #error-toast {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%) translateY(40px);
+      background: var(--bg-ui); border: 1px solid #5a2020; color: #c66;
+      font-size: 11px; padding: 7px 14px; pointer-events: none;
+      transition: transform 0.2s;
+    }
+    #error-toast.visible { transform: translateX(-50%) translateY(0); }
+
+    #no-webgpu { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    #no-webgpu.visible { display: flex; }
+    #no-webgpu h1 { font-size: 14px; font-weight: 500; color: #c66; }
+    #no-webgpu p  { font-size: 12px; color: var(--dim); }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div id="ui">
+    <div class="panel" id="panel-brand">
+      <div class="brand">Splat Viewer</div>
+      <div class="brand-sub">WebGPU · Gaussian Splatting</div>
+    </div>
+
+    <div class="panel" id="panel-stats">
+      <div class="stat"><span class="stat-label">FPS</span><span class="stat-value" id="stat-fps">—</span></div>
+      <div class="stat"><span class="stat-label">Splats</span><span class="stat-value" id="stat-splats">—</span></div>
+    </div>
+
+    <div class="panel" id="panel-load">
+      <button id="load-btn">Load Scene</button>
+      <input type="file" id="file-input" accept=".ply,.splat" />
+      <span id="scene-label">default.splat</span>
+      <span id="scene-credit" style="font-size:10px;color:var(--dim)"></span>
+    </div>
+
+    <div class="panel" id="panel-controls">
+      <div class="hint"><b>Drag</b> — Orbit</div>
+      <div class="hint"><b>Right drag</b> — Pan</div>
+      <div class="hint"><b>Scroll</b> — Zoom</div>
+    </div>
+  </div>
+
+  <div id="loading-overlay">
+    <div class="loading-label">Loading</div>
+    <div class="loading-track"><div class="loading-fill"></div></div>
+  </div>
+
+  <div id="error-toast"></div>
+
+  <div id="no-webgpu">
+    <h1>WebGPU not supported</h1>
+    <p>Use Chrome 113+ or Edge 113+ on desktop</p>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
