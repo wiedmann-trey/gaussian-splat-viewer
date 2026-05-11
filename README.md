@@ -1,6 +1,8 @@
 # Splat Viewer
 
-WebGPU Gaussian splatting renderer.
+https://wiedmann-trey.github.io/gaussian-splat-viewer/
+
+WebGPU Gaussian splat renderer
 
 ## Setup
 
