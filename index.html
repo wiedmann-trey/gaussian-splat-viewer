@@ -40,6 +40,8 @@
     #panel-brand { top: 16px; left: 16px; }
     .brand     { font-size: 13px; font-weight: 600; color: var(--text); }
     .brand-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
+    .brand-sub a { color: var(--dim); text-decoration: none; }
+    .brand-sub a:hover { color: var(--text); }
 
     #panel-stats { bottom: 16px; left: 16px; }
     .stat       { display: flex; justify-content: space-between; gap: 24px; font-size: 11px; line-height: 1.9; }
@@ -97,7 +99,7 @@
   <div id="ui">
     <div class="panel" id="panel-brand">
       <div class="brand">Splat Viewer</div>
-      <div class="brand-sub">WebGPU · Gaussian Splatting</div>
+      <div class="brand-sub"><a href="https://github.com/wiedmann-trey/gaussian-splat-viewer">github.com/wiedmann-trey/gaussian-splat-viewer</a></div>
     </div>
 
     <div class="panel" id="panel-stats">

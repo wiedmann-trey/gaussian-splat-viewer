@@ -3,8 +3,5 @@ dist/
 .env
 *.local
 
-*.ply
-*.splat
-
 .DS_Store
 Thumbs.db

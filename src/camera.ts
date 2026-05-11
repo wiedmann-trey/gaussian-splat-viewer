@@ -6,9 +6,9 @@ const NEAR   = 0.1
 const FAR    = 1000.0
 
 export class OrbitCamera {
-  private theta  = 0.5
-  private phi    = 0.4
-  private radius = 5.0
+  private theta  = 1.7
+  private phi    = 2.3
+  private radius = 50.0
   private target: Vec3 = [0, 0, 0]
 
   private dragging = false
