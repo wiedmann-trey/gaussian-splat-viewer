@@ -18,4 +18,4 @@ Following antimatter15's example, depth sorting happens on a web worker separate
 ## References
 
 - [3DGS paper](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)
-- [antimatter15 splat viewer](https://github.com/antimatter15/splat) — reference CPU sort + WebGL render
+- [antimatter15 splat viewer](https://github.com/antimatter15/splat)
